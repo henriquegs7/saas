@@ -1,0 +1,26 @@
+<app-header [title]="titleHeader" [text]="textHeader" />
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-login">
+  <!-- <app-input
+    [id]="email"
+    [type]="email"
+    [label]="Email"
+    [placeholder]="email"
+    formControlName="email" /> -->
+  <div class="input-form">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" formControlName="email"
+      placeholder="m.@example.com" required />
+  </div>
+  <div class="input-form">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password"
+      formControlName="password" required />
+  </div>
+  <div class="box-buttons">
+    <div>
+      <app-confirm />
+      <app-link [label]="forgotPasswordLink" />
+    </div>
+    <app-link [label]="singUpLink" />
+  </div>
+</form>
