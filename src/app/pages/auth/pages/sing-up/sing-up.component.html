@@ -1,11 +1,12 @@
 <app-header [title]="titleHeader" [text]="textHeader" />
-<form (ngSubmit)="onSubmit()" class="form-sing-up">
+<form [formGroup]="singUpForm" (ngSubmit)="onSubmit()" class="form-sing-up">
   <div *ngFor="let item of inputs">
     <app-input
       [id]="item.id"
       [type]="item.type"
       [label]="item.label"
-      [placeholder]="item.placeholder" />
+      [placeholder]="item.placeholder"
+      [formControlName]="item.id" />
   </div>
   <app-confirm [label]="labelConfirm" />
 </form>

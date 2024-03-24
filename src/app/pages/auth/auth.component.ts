@@ -7,10 +7,11 @@ import { LoginComponent } from './pages/login/login.component';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ LoginComponent, SingUpComponent, ForgotPasswordComponent, ReactiveFormsModule],
+  imports: [LoginComponent, SingUpComponent, ForgotPasswordComponent, ReactiveFormsModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
+
 export class AuthComponent {
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { ConfirmComponent } from '../../components/button/confirm/confirm.component';
@@ -8,14 +9,15 @@ import { InputComponent } from '../../components/input/input.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, ConfirmComponent, LinkComponent, InputComponent, ReactiveFormsModule],
+  imports: [HeaderComponent, ConfirmComponent, LinkComponent, InputComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   titleHeader = "Welcome back!"
   textHeader = "Enter your email and password to login to your account"
+  loginConfirm = "Login"
   forgotPasswordLink = "Forgot Password?"
   singUpLink = "Sing Up"
   inputs = [
@@ -29,12 +31,9 @@ export class LoginComponent implements OnInit {
       id: "password",
       type: "password",
       label: "Password",
+      placeholder: "",
     },
   ]
-
-  ngOnInit() {
-
-  }
 
   loginForm = new FormGroup({
     email: new FormControl<string>('', [Validators.required, Validators.email]),
@@ -42,11 +41,11 @@ export class LoginComponent implements OnInit {
   });
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      const formData = this.loginForm.value;
-      console.log(formData); // Example: { username: '...', email: '...' }
-    } else {
-      console.log("Digita os negócio certo!");
+    if (this.loginForm.invalid) {
+      console.log('Formulário inválido');
+      return;
     }
+
+    console.log('Formulário submetido!', this.loginForm.value)
   }
 }

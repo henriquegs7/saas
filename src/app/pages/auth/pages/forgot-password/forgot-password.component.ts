@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { ConfirmComponent } from '../../components/button/confirm/confirm.component';
 import { InputComponent } from '../../components/input/input.component';
@@ -11,12 +11,13 @@ import { InputComponent } from '../../components/input/input.component';
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.scss'
 })
-export class ForgotPasswordComponent{
 
+export class ForgotPasswordComponent {
+  submited: boolean = false;
 
   titleHeader = "Forgot Password?"
   textHeader = "Enter your email to reset your password"
-  inputs = {
+  input = {
     email: {
       id: "email",
       type: "email",
@@ -31,7 +32,13 @@ export class ForgotPasswordComponent{
   });
 
   onSubmit() {
+    this.submited = true;
+
+    if (this.forgotPasswordForm.invalid) {
+      console.log('Formulário inválido');
+      return;
+    }
+
     console.log('Formulário submetido!', this.forgotPasswordForm.value);
   }
-
 }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConfirmComponent } from '../../components/button/confirm/confirm.component';
 import { HeaderComponent } from '../../components/header/header.component';
 import { InputComponent } from '../../components/input/input.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sing-up',
@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './sing-up.component.html',
   styleUrl: './sing-up.component.scss'
 })
+
 export class SingUpComponent {
   titleHeader = "New Here?"
   textHeader = "Enter your email below to create a new account"
@@ -44,7 +45,7 @@ export class SingUpComponent {
       label: "Password",
     },
     {
-      id: "confirm-password",
+      id: "confirmPassword",
       type: "password",
       label: "Confirm Password",
     }
@@ -57,14 +58,15 @@ export class SingUpComponent {
     phone: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
+    confirmPassword: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
   });
 
   onSubmit() {
-    if (this.singUpForm.valid) {
-      const formData = this.singUpForm.value;
-      console.log(formData); // Example: { username: '...', email: '...' }
-    } else {
-      console.log("Digita os negócio certo!");
+    if (this.singUpForm.invalid) {
+      console.log('Formulário inválido');
+      return;
     }
+
+    console.log('Formulário submetido!', this.singUpForm.value)
   }
 }

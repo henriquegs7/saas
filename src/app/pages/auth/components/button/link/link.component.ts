@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './link.component.html',
   styleUrl: './link.component.scss'
 })
+
 export class LinkComponent {
   @Input() label!: string;
 }
