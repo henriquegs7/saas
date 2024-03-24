@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConfirmComponent } from '../../components/button/confirm/confirm.component';
 import { HeaderComponent } from '../../components/header/header.component';
@@ -14,6 +15,8 @@ import { InputComponent } from '../../components/input/input.component';
 })
 
 export class SingUpComponent {
+  title = 'Sing Up';
+
   titleHeader = "New Here?"
   textHeader = "Enter your email below to create a new account"
   inputs = [
@@ -52,6 +55,12 @@ export class SingUpComponent {
   ]
   labelConfirm = "Sing Up"
 
+  constructor(private router: Router) {}
+
+  redirecionarParaRota() {
+    this.router.navigate(['/login']);
+  }
+
   singUpForm = new FormGroup({
     name: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
     birthday: new FormControl<string>('', [Validators.required, Validators.minLength(10)]),
@@ -68,5 +77,6 @@ export class SingUpComponent {
     }
 
     console.log('Formulário submetido!', this.singUpForm.value)
+    this.redirecionarParaRota()
   }
 }

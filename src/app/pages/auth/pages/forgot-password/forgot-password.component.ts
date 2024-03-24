@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { ConfirmComponent } from '../../components/button/confirm/confirm.component';
@@ -13,6 +14,8 @@ import { InputComponent } from '../../components/input/input.component';
 })
 
 export class ForgotPasswordComponent {
+  title = 'Forgot Password';
+
   submited: boolean = false;
 
   titleHeader = "Forgot Password?"
@@ -27,6 +30,12 @@ export class ForgotPasswordComponent {
   }
   labelConfirm = "Reset Password"
 
+  constructor(private router: Router) { }
+
+  redirecionarParaRota() {
+    this.router.navigate(['/login']);
+  }
+
   forgotPasswordForm = new FormGroup({
     email: new FormControl<string>('', [Validators.required, Validators.email]),
   });
@@ -40,5 +49,6 @@ export class ForgotPasswordComponent {
     }
 
     console.log('Formulário submetido!', this.forgotPasswordForm.value);
+    this.redirecionarParaRota();
   }
 }

@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from "@angular/forms"
-import { SingUpComponent } from './pages/sing-up/sing-up.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { LoginComponent } from './pages/login/login.component';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [LoginComponent, SingUpComponent, ForgotPasswordComponent, ReactiveFormsModule],
+  imports: [RouterOutlet, ReactiveFormsModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
 
-export class AuthComponent {
+export class AuthComponent implements OnInit {
+  constructor(private router: Router) {}
 
+  ngOnInit() {
+    this.router.navigate(['login']);
+  }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { ConfirmComponent } from '../../components/button/confirm/confirm.component';
@@ -15,11 +16,15 @@ import { InputComponent } from '../../components/input/input.component';
 })
 
 export class LoginComponent {
+  title = 'Login';
+
   titleHeader = "Welcome back!"
   textHeader = "Enter your email and password to login to your account"
   loginConfirm = "Login"
-  forgotPasswordLink = "Forgot Password?"
-  singUpLink = "Sing Up"
+  forgotPasswordLink = "/forgotpassword"
+  singUpLink = "/singup"
+  forgotPasswordLabel = "Forgot Password?"
+  singUpLabel = "Sing Up"
   inputs = [
     {
       id: "email",
@@ -35,6 +40,12 @@ export class LoginComponent {
     },
   ]
 
+  constructor(private router: Router) { }
+
+  redirecionarParaRota() {
+    this.router.navigate(['/home']);
+  }
+
   loginForm = new FormGroup({
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
@@ -47,5 +58,6 @@ export class LoginComponent {
     }
 
     console.log('Formulário submetido!', this.loginForm.value)
+    this.redirecionarParaRota()
   }
 }
